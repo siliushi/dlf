@@ -12,7 +12,7 @@ function run(dir) {
         files.forEach(function(file,index){
             var curPath = path.join(dir,file);
             if(fs.statSync(curPath).isDirectory()) {
-                deleteFolderRecursive(curPath);   
+                run(curPath);   
             } else { 
                 fs.unlinkSync(curPath);
             }
