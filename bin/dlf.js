@@ -8,16 +8,20 @@ var path = require("path");
 function run(dir) {
     var files = [];
     if( fs.existsSync(dir) ) {
-        files = fs.readdirSync(dir);
-        files.forEach(function(file,index){
-            var curPath = path.join(dir,file);
-            if(fs.statSync(curPath).isDirectory()) {
-                run(curPath);   
-            } else { 
-                fs.unlinkSync(curPath);
-            }
-        });
-        fs.rmdirSync(dir);
+        if(fs.statSync(dir).isDirectory()) {
+            files = fs.readdirSync(dir);
+            files.forEach(function(file,index){
+                var curPath = path.join(dir,file);
+                if(fs.statSync(curPath).isDirectory()) {
+                    run(curPath);   
+                } else { 
+                    fs.unlinkSync(curPath);
+                }
+            });
+            fs.rmdirSync(dir);
+        } else {
+            fs.unlinkSync(dir);
+        }
     }else{
         npmlog.error("给定的路径不存在，请给出正确的路径");
     }
