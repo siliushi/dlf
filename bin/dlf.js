@@ -7,7 +7,10 @@ var path = require("path");
 
 function run(dir) {
     var files = [];
-    if( fs.existsSync(dir) ) {
+    if(dir === '*') {
+        dir = path.join(__dirname);
+    }
+    if(fs.existsSync(dir)) {
         if(fs.statSync(dir).isDirectory()) {
             files = fs.readdirSync(dir);
             files.forEach(function(file,index){

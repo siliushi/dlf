@@ -21,6 +21,8 @@ dlf file
   + delete directory     
 2017-05-27     
   + delete signal file     
+2017-07-19     
+  + support *     
      
 # plan    
     
